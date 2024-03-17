@@ -1,0 +1,1 @@
+ALTER TABLE "users" ALTER COLUMN "time_ellaps" SET DATA TYPE interval;

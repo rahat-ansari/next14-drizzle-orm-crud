@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1699733059937,
+      "tag": "0000_shallow_iron_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1699737918005,
+      "tag": "0001_unique_jetstream",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706945595921,
+      "tag": "0002_steady_eternity",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1706945703851,
+      "tag": "0003_goofy_frightful_four",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1706960236235,
+      "tag": "0004_premium_nextwave",
+      "breakpoints": true
+    }
+  ]
+}
