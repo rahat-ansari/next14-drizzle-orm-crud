@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import {and, eq, gt, like} from "drizzle-orm";
+import { and, eq, gt } from "drizzle-orm";
 
 /**
  * Renders a list of items fetched from a database.
@@ -9,7 +9,7 @@ import {and, eq, gt, like} from "drizzle-orm";
  */
 
 export default async function Home() {
- // const result = await db.select().from(users).where(eq(users.role, "admin"));
+  // const result = await db.select().from(users).where(eq(users.role, "admin"));
   const role = "admin";
 
   const validRoles = ["admin", "customer"];
@@ -18,15 +18,15 @@ export default async function Home() {
     throw new Error("Invalid role");
   }
   const result = await db
-      .select()
-      .from(users)
-      .where(
-          and(
-              //eq(users.role, role),
-             // like(users.fullName, "%a%"),
-              gt(users.score, 30)
-          )
-      );
+    .select()
+    .from(users)
+    .where(
+      and(
+        eq(users.role, role),
+        // like(users.fullName, "%a%"),
+        gt(users.score, 30)
+      )
+    );
   const breakPoint = 1;
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
