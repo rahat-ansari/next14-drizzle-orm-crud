@@ -38,4 +38,5 @@ next-env.d.ts
 /.env
 /public/
 /.idea/
-/data/db/
+/data/db/*
+.history/

@@ -1,3 +1,14 @@
+/**
+ * This module defines the database schema for the application, including tables for users, posts, categories, and their relationships.
+ *
+ * The `users` table stores user information such as name, email, password, and other profile details.
+ * The `posts` table stores blog posts, with a reference to the author (user) and the categories the post belongs to.
+ * The `categories` table stores the categories for the blog posts.
+ * The `post_categories` table is a junction table that maps the many-to-many relationship between posts and categories.
+ * The `profiles` table stores additional user profile information, linked to the `users` table.
+ *
+ * The schema is defined using the `drizzle-orm` library, which provides a type-safe way to interact with the database.
+ */
 import { relations } from "drizzle-orm";
 import {
   integer,
@@ -24,6 +35,13 @@ export const users = pgTable("users", {
   //date: interval("date"),
 });
 
+/**
+ * Defines the relations between the `users` table and other tables in the database schema.
+ *
+ * The `userRelations` object defines the following relations:
+ * - `profile`: A one-to-one relation between a user and their profile information, using the `profiles` table.
+ * - `posts`: A one-to-many relation between a user and the posts they have authored, using the `posts` table.
+ */
 export const userRelations = relations(users, ({ one, many }) => ({
   profile: one(profiles, {
     fields: [users.id],
@@ -40,6 +58,10 @@ export const posts = pgTable("posts", {
     .references(() => users.id),
 });
 
+/**
+ * Defines a one-to-one relation between a post and its author, using the `users` table.
+ * The `author` relation maps the `authorId` field on the `posts` table to the `id` field on the `users` table.
+ */
 export const postRelations = relations(posts, ({ one, many }) => ({
   author: one(users, {
     fields: [posts.authorId],
