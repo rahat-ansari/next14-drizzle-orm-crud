@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import { and, eq, gt } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 /**
  * Renders a list of items fetched from a database.
@@ -22,9 +22,9 @@ export default async function Home() {
     .from(users)
     .where(
       and(
-        eq(users.role, role),
+        eq(users.role, role)
         // like(users.fullName, "%a%"),
-        gt(users.score, 30)
+        //gt(users.score, 30)
       )
     );
   const breakPoint = 1;
