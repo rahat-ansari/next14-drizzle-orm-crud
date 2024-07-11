@@ -2,7 +2,7 @@ import { createSwaggerSpec } from "next-swagger-doc";
 
 export const getApiDocs = async () => {
   const spec = createSwaggerSpec({
-    apiFolder: "app/api/user", // define api folder under app folder
+    apiFolder: "app/api/users", // define api folder under app folder
     definition: {
       openapi: "3.0.0",
       info: {
@@ -15,6 +15,18 @@ export const getApiDocs = async () => {
             type: "http",
             scheme: "bearer",
             bearerFormat: "JWT",
+          },
+        },
+        schemas: {
+          User: {
+            type: "object",
+            properties: {
+              role: {
+                type: "string",
+                description: "User role",
+                enum: ["admin", "customer"],
+              },
+            },
           },
         },
       },

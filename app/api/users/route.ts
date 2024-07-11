@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 //import Error from "next/error";
 
 const role = "admin";
@@ -69,7 +69,7 @@ if (!validRoles.includes(role)) {
 
 /**
  * @swagger
- * /api/user:
+ * /api/users:
  *   get:
  *     summary: Get filtered users
  *     description: Retrieves a list of filtered users based on specific criteria
@@ -82,16 +82,62 @@ if (!validRoles.includes(role)) {
 
 export async function GET(): Promise<Response> {
   // Do whatever you want
-  const result = await db
-    .select()
-    .from(users)
-    .where(
-      and(
-        eq(users.role, role)
-        // like(users.fullName, "%a%"),
-        //gt(users.score, 30)
-      )
-    );
+  const result = await db.select().from(users).where(
+    and()
+    //inArray(users.role, ["admin", "customer"])
+    // like(users.fullName, "%a%"),
+    //gt(users.score, 30)
+  );
+
+  return NextResponse.json(result);
+}
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Fetch users according to role
+ *     description: Retrieves users based on the provided role
+ *     parameters:
+ *       - in: path
+ *         name: role
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [admin, customer]
+ *         example: admin
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               role:
+ *                 type: string
+ *                 enum: [admin, customer]
+ *                 example: admin
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Bad request
+ */
+
+export async function POST(request: NextRequest): Promise<Response> {
+  const body = await request.json();
+  const { role } = body;
+
+  if (!role) {
+    return NextResponse.json({ error: "Invalid role" }, { status: 400 });
+  }
+
+  const result = await db.select().from(users).where(eq(users.role, role));
 
   return NextResponse.json(result);
 }
