@@ -102,30 +102,30 @@ export async function GET(): Promise<Response> {
  *         name: role
  *         required: true
  *         schema:
- *           type: string
- *           enum: [admin, customer]
- *         example: admin
+ *           $ref: '#/components/schemas/Role'
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               role:
- *                 type: string
- *                 enum: [admin, customer]
- *                 example: admin
+ *             $ref: '#/components/schemas/UserRequest'
+ *           examples:
+ *             admin:
+ *               value:
+ *                 role: admin
+ *             customer:
+ *               value:
+ *                 role: customer
  *     responses:
- *       200:
+ *       '200':
  *         description: Successful response
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/User'
- *       400:
+ *                 $ref: '#/components/schemas/UserResponse'
+ *       '400':
  *         description: Bad request
  */
 

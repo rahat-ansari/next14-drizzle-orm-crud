@@ -34,9 +34,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/.yarn/
+# local env files 
 /.env
+
+/.yarn/
 /public/
 /.idea/
+/.vscode/
 /data/db/*
-.history/
+/.history/
+
+/data/db/base

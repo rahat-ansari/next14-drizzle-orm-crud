@@ -18,13 +18,64 @@ export const getApiDocs = async () => {
           },
         },
         schemas: {
-          User: {
+          Role: {
+            type: "string",
+            // example: "admin",
+          },
+          UserRequest: {
             type: "object",
             properties: {
+              role: {
+                $ref: "#/components/schemas/Role",
+              },
+            },
+            required: ["role"],
+          },
+          UserResponse: {
+            type: "object",
+            properties: {
+              id: {
+                type: "integer",
+                description: "User ID",
+              },
+              name: {
+                type: "string",
+                description: "User name",
+              },
+              email: {
+                type: "string",
+                description: "User email",
+              },
+              fullName: {
+                type: "string",
+                description: "User full name",
+              },
+              phone: {
+                type: "string",
+                description: "User phone number",
+              },
+              address: {
+                type: "string",
+                description: "User address",
+              },
+              score: {
+                type: "integer",
+                description: "User score",
+              },
               role: {
                 type: "string",
                 description: "User role",
                 enum: ["admin", "customer"],
+              },
+              createdAt: {
+                type: "string",
+                format: "date-time",
+                description: "User creation date",
+              },
+              updatedAt: {
+                type: "string",
+                format: "date-time",
+                description: "User last update date",
               },
             },
           },
